@@ -1,0 +1,1189 @@
+{% extends 'sims/base.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="shortcut icon" href="images/icon-48x48.png">
+
+    <title>Amani internasional optical centre (AIOC)</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&amp;display=swap" rel="stylesheet">
+
+    <!-- Choose your prefered color scheme -->
+    <!-- <link href="css/light.css" rel="stylesheet"> -->
+    <!-- <link href="css/dark.css" rel="stylesheet"> -->
+
+    <!-- BEGIN SETTINGS -->
+    <!-- Remove this after purchasing -->
+    <link href="{% static 'sims/css/light.css' %}" rel="stylesheet">
+    <link class="js-stylesheet" href="{% static 'sims/css/light.css' %}" rel="stylesheet">
+    <link class="js-stylesheet" href="{% static 'sims/css/viewpatient.css' %}" rel="stylesheet">
+    <!-- END SETTINGS -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-120946860-10"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-120946860-10', {
+            'anonymize_ip': true
+        });
+    </script>
+    
+</head>
+<!--
+  HOW TO USE: 
+  data-theme: default (default), dark, light, colored
+  data-layout: fluid (default), boxed
+  data-sidebar-position: left (default), right
+  data-sidebar-layout: default (default), compact
+-->
+
+<body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-layout="default">
+    <div class="wrapper">
+
+        <div class="main">
+
+
+            <main class="content">
+                <div class="container-fluid p-0">
+
+                    <div class="mb-3">
+                        <h1 class="h3 d-inline align-middle">Amani International optical centre</h1><a class="badge bg-primary ms-2" href="#" target="_blank">Information {{viewpatient.First_Name}} {{viewpatient.Middle_Name}} {{viewpatient.Last_Name}}</i></a>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="alert alert-warning alert-dismissible" role="alert">
+                                <div class="alert-message">
+                                    <h4 class="alert-heading">AMANI INTERNATIONAL OPTICAL CENTRE, THE HEALING CENTRE</h4>
+                                    <p>
+                                        Best care for your eyes is our first priority
+                                    </p>
+                                    <pre class="h6 text-danger mb-0"><script src="{% static 'web/js/datatables.js' %}"></script></pre>
+                                </div>
+                            </div>
+
+
+
+                            <div class="card">
+
+
+
+                                {% if user.is_admin or user.is_staff %}
+
+
+
+
+                                <div class="button-container">
+                                    <button class="button" onclick="toggleContent(0)">Clinic Notes</button>
+                                    <button class="button" onclick="toggleContent(1)">Diagnosis</button>
+                                    <button class="button" onclick="toggleContent(2)">Medication</button>
+                                    <button class="button" onclick="toggleContent(3)">Management</button>
+                                </div>
+                            
+                                <div class="button-content active" id="content0">
+                                    <div class="inner-button-container">
+                                        <button class="inner-button" onclick="toggleInnerContent(0, 0)">History</button>
+                                        <button class="inner-button" onclick="toggleInnerContent(1, 0)">Eye Examination</button>
+                                        <button class="inner-button" onclick="toggleInnerContent(2, 0)">Investigation</button>
+                                        <button class="inner-button" onclick="toggleInnerContent(3, 0)">Refraction</button>
+                                    </div>
+                            
+                                    <div class="button-content active" id="innerContent00">
+                                        <!-- Display sub-buttons by default -->
+                                        <div class="inner-button-container" id="innerButtonContainer">
+                                            <button class="inner-button" onclick="toggleSubButtonContent(0, 0, 0)">Chief Complain</button>
+                                            <button class="inner-button" onclick="toggleSubButtonContent(1, 0, 0)">History of Present Illness</button>
+                                            <button class="inner-button" onclick="toggleSubButtonContent(2, 0, 0)">General Health</button>
+                                            <button class="inner-button" onclick="toggleSubButtonContent(3, 0, 0)">Family History</button>
+                            
+                            
+                                        </div>
+                            
+                            
+                                        <div class="sub-button" id="contentss0">
+                                            <div class="comment-form">
+                                                <h3 class="comment-reply-title">Add Record</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formclinic}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="sub-button" id="contentss1">
+                                            <div class="comment-form">
+                                                <h3 class="comment-reply-title">Add Record</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formhistory}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="sub-button" id="contentss2">
+                                            <div class="comment-form">
+                                                <h3 class="comment-reply-title">Add Record</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formgeneral}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="sub-button" id="contentss3">
+                                            <div class="comment-form">
+                                                <h3 class="comment-reply-title">Add Record</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formfamily}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div>
+                                        </div>
+                            
+                                    </div>
+                                    <div class="button-content" id="innerContent01">
+                                        <!-- Display sub-buttons by default -->
+                                        <div class="inner-button-container" id="innerButtonContainer">
+                                            <button class="inner-button" onclick="toggleSubButtonTwoContent(0, 0, 0)">Visual Acuity</button>
+                                            <button class="inner-button" onclick="toggleSubButtonTwoContent(1, 0, 0)">Visual Acuity With Glasses</button>
+                                            <button class="inner-button" onclick="toggleSubButtonTwoContent(2, 0, 0)">IOP</button>
+                                            <button class="inner-button" onclick="toggleSubButtonTwoContent(3, 0, 0)">Ocular Examination</button>
+                            
+                            
+                                        </div>
+                            
+                            
+                                        <div class="sub-button" id="contentsss0">
+                                            <div class="comment-form">
+                                                <h3 class="comment-reply-title">Add R.E</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formre}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div>
+
+                                            <br>
+
+                                            <div class="comment-form">
+                                                <h3 class="comment-reply-title">Add L.E</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formle}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="sub-button" id="contentsss1">
+                                            <div class="comment-form">
+                                                <h3 class="comment-reply-title">Add Record</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formvisual}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="sub-button" id="contentsss2">
+                                            <div class="comment-form">
+                                                <h3 class="comment-reply-title">Add Record</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formiopa}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div>
+
+                                            <br>
+
+                                            <div class="comment-form">
+                                                <h3 class="comment-reply-title">Add Record</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formiopb}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+
+
+
+
+
+                                        <div class="sub-button" id="contentsss3">
+                                            <div class="comment-form">
+                                                <h3 class="comment-reply-title">Ocular Examination</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formeyelidr}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div>
+
+                                            {% comment %} <div class="comment-form">
+                                                <h3 class="comment-reply-title">EYELID L.E</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formeyelidl}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div> {% endcomment %}
+
+                                            {% comment %} <div class="comment-form">
+                                                <h3 class="comment-reply-title">CONJUNCTIVA R.E</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formconjuctivar}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div> {% endcomment %}
+
+                                            {% comment %} <div class="comment-form">
+                                                <h3 class="comment-reply-title">CONJUNCTIVA L.E</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formconjuctival}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div> {% endcomment %}
+
+                                            {% comment %} <div class="comment-form">
+                                                <h3 class="comment-reply-title">CORNEA R.E</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formcornear}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div> {% endcomment %}
+
+                                            {% comment %} <div class="comment-form">
+                                                <h3 class="comment-reply-title">CORNEA L.E</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formcorneal}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div> {% endcomment %}
+
+                                            {% comment %} <div class="comment-form">
+                                                <h3 class="comment-reply-title">A/C R.E</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formacr}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div> {% endcomment %}
+
+                                            {% comment %} <div class="comment-form">
+                                                <h3 class="comment-reply-title">A/C L.E</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formacl}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div> {% endcomment %}
+
+                                            {% comment %} <div class="comment-form">
+                                                <h3 class="comment-reply-title">PUPIL R.E</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formpupilr}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div> {% endcomment %}
+
+                                            {% comment %} <div class="comment-form">
+                                                <h3 class="comment-reply-title">PUPIL L.E</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formpupill}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div> {% endcomment %}
+
+                                            {% comment %} <div class="comment-form">
+                                                <h3 class="comment-reply-title">IRIS R.E</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formirisr}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div> {% endcomment %}
+
+                                            {% comment %} <div class="comment-form">
+                                                <h3 class="comment-reply-title">IRIS L.E</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formirisl}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div> {% endcomment %}
+
+                                            {% comment %} <div class="comment-form">
+                                                <h3 class="comment-reply-title">LENS R.E</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formlensr}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div> {% endcomment %}
+
+                                            {% comment %} <div class="comment-form">
+                                                <h3 class="comment-reply-title">LENS L.E</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formlensl}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div> {% endcomment %}
+
+                                            {% comment %} <div class="comment-form">
+                                                <h3 class="comment-reply-title">VITREOUS R.E</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formvitreousr}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div> {% endcomment %}
+
+                                            {% comment %} <div class="comment-form">
+                                                <h3 class="comment-reply-title">VITREOUS L.E</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formvitreousl}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div> {% endcomment %}
+
+                                            {% comment %} <div class="comment-form">
+                                                <h3 class="comment-reply-title">RETINA R.E</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formretinar}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div> {% endcomment %}
+
+                                            {% comment %} <div class="comment-form">
+                                                <h3 class="comment-reply-title">RETINA L.E</h3>
+                                                <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                    {% csrf_token %}
+                                                    {{formretinal}}
+                                                    <br>
+                                                    <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                    
+                                                </form>
+                                            </div> {% endcomment %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        </div>
+                                    </div>
+                                    <div class="button-content" id="innerContent02">
+                                        <div class="comment-form">
+                                            <h3 class="comment-reply-title">Add Record</h3>
+                                            <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                {% csrf_token %}
+                                                {{forminvestigation}}
+                                                <br>
+                                                <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="button-content" id="innerContent03">
+                                        <div class="comment-form">
+                                            <h3 class="comment-reply-title">Add OD</h3>
+                                            <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                {% csrf_token %}
+                                                {{formod}}
+                                                <br>
+                                                <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                
+                                            </form>
+                                        </div>
+<br>
+                                        <div class="comment-form">
+                                            <h3 class="comment-reply-title">Add OS</h3>
+                                            <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                                {% csrf_token %}
+                                                {{formos}}
+                                                <br>
+                                                <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                                
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="button-content" id="content1">
+                                    <div class="comment-form">
+                                        <h3 class="comment-reply-title">Add Record</h3>
+                                        <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                            {% csrf_token %}
+                                            {{formdiagnosis}}
+                                            <br>
+                                            <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                            
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="button-content" id="content2">
+                                    <div class="comment-form">
+                                        <h3 class="comment-reply-title">Add Record</h3>
+                                        <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                            {% csrf_token %}
+                                            {{formmedication}}
+                                            <br>
+                                            <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                            
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="button-content" id="content3">
+                                    <div class="comment-form">
+                                        <h3 class="comment-reply-title">Add Record</h3>
+                                        <form method="POST" action="{% url 'viewpatient' object.pk %}">
+                                            {% csrf_token %}
+                                            {{formmanagement}}
+                                            <br>
+                                            <button class="inner-button" type="Submit" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Add</button>
+                                            
+                                        </form>
+                                    </div>
+                                </div>
+
+
+                                {% endif %}
+
+                            {% comment %} <button class="inner-button" id="printButton" style="color: white;font-weight: bold;margin-top: 0.3cm;width: 6cm;padding: 10px;border-radius: 8px;font-size: 20px;">Print to PDF</button> {% endcomment %}
+                            <br><br>
+                            <button class="printbutton" onclick="printData()">Print Patient Information</button>
+                            <div id="myprint">
+                                <div class="card-header">
+                                    <h4 class="card-title">Patient Information</h4>
+                                </div>
+                                <div class="card-body table-responsive">
+                                    <table id="" class="table table-striped" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                              <th scope="">Full Name:</th>
+                                              <th scope="">{{object.First_Name}} {{object.Middle_Name}} {{object.Last_Name}}</th>
+                                            </tr>
+                                            <tr>
+                                              <th scope="">Patient Id:</th>
+                                              <th scope="">{{object.Patient_Id}}</th>
+                                            </tr>
+                                            <tr>
+                                              <th scope="">Phone:</th>
+                                              <th scope="">{{object.Phone}}</th>
+                                            </tr>
+                                            <tr>
+                                              <th scope="">Date Registered:</th>
+                                              <th scope="">{{object.date_joined}}</th>
+                                            </tr>
+                                            <tr>
+                                              <th scope="">Payment:</th>
+                                              <th scope="">{{object.Payment}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">Cost:</th>
+                                                <th scope="">TSh. {{object.Cost}}</th>
+                                            </tr>
+                                          </thead>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                
+
+
+                                <div class="card-body table-responsive">
+                                    <table id="" class="table table-striped" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th scope=""><h3>MEDICAL TREATMENT</h3></th>
+                                            </tr>
+                                        {% if post_family or post_general or post_history or post_clinic or post_management or post_medication or post_diagnosis or post_od or post_os or post_investigation or post_re or post_le or post_visual or post_iopa or post_iopb or post_eyelidr or post_eyelidl or post_conjunctivar or post_conjunctival or post_cornear or post_corneal or post_acr or post_acl or post_pupilr or post_pupill or post_irisr or post_irisl or post_lensr or post_lensl or post_vitreousr or post_vitreousl or post_retinar or post_retinal %}
+                                        
+                                            {% if user.is_admin or user.is_staff %}
+
+                                            {% for clinic in post_clinic %}
+                                            <tr>
+                                              <th scope="">Chief Complain</th>
+                                              <th scope="">{{clinic.Clinics}}</th>
+                                            </tr>
+                                            {% comment %} <tr>
+                                                <th scope="">Update Chief Complain</th>
+                                                
+                                                <th scope=""><a href="{% url 'update_instance' instance_id=instance_id %}">Update Clinics</a></th>
+                                            </tr> {% endcomment %}
+
+                                            {% endfor %}
+
+                                            {% for history in post_history %}
+                                            <tr>
+                                              <th scope="">History of present illness</th>
+                                              <th scope="">{{history.History}}</th>
+                                            </tr>
+                                            {% endfor %}
+                                    
+
+                                            {% for general in post_general %}
+                                            <tr>
+                                              <th scope="">General Health</th>
+                                              <th scope="">{{general.General}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+                                            {% for family in post_family %}
+                                            <tr>
+                                              <th scope="">Family History</th>
+                                              <th scope="">{{family.Family}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+                                            {% if post_re or post_le %}
+
+                                            <tr>
+                                                <th scope=""></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">Visual Acuity</th>
+                                            </tr>
+
+                                            {% for re in post_re %}
+                                            <tr>
+                                              <th scope="">R.E</th>
+                                              <th scope="">{{re.RE}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">P.H</th>
+                                                <th scope="">{{re.PHR}}</th>
+                                              </tr>
+                                            {% endfor %}
+
+                                            {% for le in post_le %}
+                                            <tr>
+                                              <th scope="">L.E</th>
+                                              <th scope="">{{le.LE}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">P.H</th>
+                                                <th scope="">{{le.PHL}}</th>
+                                              </tr>
+                                            {% endfor %}
+                                            {% endif %}
+
+                                            {% for visual in post_visual %}
+                                            <tr>
+                                                <th scope=""></th>
+                                            </tr>
+                                            <tr>
+                                              <th scope="">Visual acuit with glasses</th>
+                                              <th scope="">{{visual.Visual}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+                                            {% if post_iopa or post_iopb %}
+                                            <tr>
+                                                <th scope=""></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">IOP</th>
+                                            </tr>
+                                            {% for iopa in post_iopa %}
+                                            <tr>
+                                              <th scope="">R.E</th>
+                                              <th scope="">{{iopa.REIOPA}}</th>
+                                            </tr>
+
+                                            <tr>
+                                                <th scope="">L.E</th>
+                                                <th scope="">{{iopa.LEIOPA}}</th>
+                                              </tr>
+                                            {% endfor %}
+
+                                            {% for iopb in post_iopb %}
+                                            <tr>
+                                              <th scope="">R.E</th>
+                                              <th scope="">{{iopb.REIOPB}} mmHg</th>
+                                            </tr>
+
+                                            <tr>
+                                                <th scope="">L.E</th>
+                                                <th scope="">{{iopb.LEIOPB}} mmHg</th>
+                                              </tr>
+                                            {% endfor %}
+
+                                            {% endif %}
+
+                                
+
+
+
+
+
+
+                                            {% if post_eyelidr or post_eyelidl or post_conjunctivar or post_conjunctival or post_cornear or post_corneal or post_acr or post_acl or post_pupilr or post_pupill or post_irisr or post_irisl or post_lensr or post_lensl or post_vitreousr or post_vitreousl or post_retinar or post_retinal %}
+                                            <tr>
+                                                <th scope=""></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">Ocular Examination</th>
+                                            </tr>
+                                            {% for eyelidr in post_eyelidr %}
+                                            <tr>
+                                              <th scope="">EYELID R.E</th>
+                                              <th scope="">{{eyelidr.StatusEYELIDR}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">EYELID L.E</th>
+                                                <th scope="">{{eyelidr.StatusEYELIDLS}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">CONJUNCTIVA R.E</th>
+                                                <th scope="">{{eyelidr.StatusCONJUNCTIVARS}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">CONJUNCTIVA L.E</th>
+                                                <th scope="">{{eyelidr.StatusCONJUNCTIVALS}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">CORNEA R.E</th>
+                                                <th scope="">{{eyelidr.StatusCORNEARS}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">CORNEA L.E</th>
+                                                <th scope="">{{eyelidr.StatusCORNEALS}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">A/C R.E</th>
+                                                <th scope="">{{eyelidr.StatusACRS}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">A/C L.E</th>
+                                                <th scope="">{{eyelidr.StatusACLS}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">PUPIL R.E</th>
+                                                <th scope="">{{eyelidr.StatusPUPILRS}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">PUPIL L.E</th>
+                                                <th scope="">{{eyelidr.StatusPUPILLS}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">IRIS R.E</th>
+                                                <th scope="">{{eyelidr.StatusIRISRS}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">IRIS L.E</th>
+                                                <th scope="">{{eyelidr.StatusIRISLS}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">LENS R.E</th>
+                                                <th scope="">{{eyelidr.StatusLENSRS}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">LENS L.E</th>
+                                                <th scope="">{{eyelidr.StatusLENSLS}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">VITREOUS R.E</th>
+                                                <th scope="">{{eyelidr.StatusVITREOUSRS}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">VITREOUS L.E</th>
+                                                <th scope="">{{eyelidr.StatusVITREOUSLS}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">RETINA R.E</th>
+                                                <th scope="">{{eyelidr.StatusRETINARS}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">RETINA L.E</th>
+                                                <th scope="">{{eyelidr.StatusRETINALS}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+                                            {% comment %} NOT IN USE BUT HAVE DATA, KEEP IT {% endcomment %}
+
+                                            {% for eyelidl in post_eyelidl %}
+                                            <tr>
+                                              <th scope="">EYELID L.E</th>
+                                              <th scope="">{{eyelidl.StatusEYELIDL}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+                                            {% for conjunctivar in post_conjunctivar %}
+                                            <tr>
+                                              <th scope="">CONJUNCTIVA R.E</th>
+                                              <th scope="">{{conjunctivar.StatusCONJUNCTIVAR}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+                                            {% for conjunctival in post_conjunctival %}
+                                            <tr>
+                                              <th scope="">CONJUNCTIVA L.E</th>
+                                              <th scope="">{{conjunctival.StatusCONJUNCTIVAL}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+                                            {% for cornear in post_cornear %}
+                                            <tr>
+                                              <th scope="">CORNEA R.E</th>
+                                              <th scope="">{{cornear.StatusCORNEAR}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+                                            {% for corneal in post_corneal %}
+                                            <tr>
+                                              <th scope="">CORNEA L.E</th>
+                                              <th scope="">{{corneal.StatusCORNEAL}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+                                            {% for acr in post_acr %}
+                                            <tr>
+                                              <th scope="">A/C R.E</th>
+                                              <th scope="">{{acr.StatusACR}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+                                            {% for acl in post_acl %}
+                                            <tr>
+                                              <th scope="">A/C L.E</th>
+                                              <th scope="">{{acl.StatusACL}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+                                            {% for pupilr in post_pupilr %}
+                                            <tr>
+                                              <th scope="">PUPIL R.E</th>
+                                              <th scope="">{{pupilr.StatusPUPILR}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+                                            {% for pupill in post_pupill %}
+                                            <tr>
+                                              <th scope="">PUPIL L.E</th>
+                                              <th scope="">{{pupill.StatusPUPILL}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+                                            {% for irisr in post_irisr %}
+                                            <tr>
+                                              <th scope="">IRIS R.E</th>
+                                              <th scope="">{{irisr.StatusIRISR}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+                                            {% for irisl in post_irisl %}
+                                            <tr>
+                                              <th scope="">IRIS L.E</th>
+                                              <th scope="">{{irisl.StatusIRISL}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+                                            {% for lensr in post_lensr %}
+                                            <tr>
+                                              <th scope="">LENS R.E</th>
+                                              <th scope="">{{lensr.StatusLENSR}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+                                            {% for lensl in post_lensl %}
+                                            <tr>
+                                              <th scope="">LENS L.E</th>
+                                              <th scope="">{{lensl.StatusLENSL}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+                                            {% for vitreousr in post_vitreousr %}
+                                            <tr>
+                                              <th scope="">VITREOUS R.E</th>
+                                              <th scope="">{{vitreousr.StatusVITREOUSR}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+                                            {% for vitreousl in post_vitreousl %}
+                                            <tr>
+                                              <th scope="">VITREOUS L.E</th>
+                                              <th scope="">{{vitreousl.StatusVITREOUSL}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+                                            {% for retinar in post_retinar %}
+                                            <tr>
+                                              <th scope="">RETINA R.E</th>
+                                              <th scope="">{{retinar.StatusRETINAR}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+                                            {% for retinal in post_retinal %}
+                                            <tr>
+                                              <th scope="">RETINA L.E</th>
+                                              <th scope="">{{retinal.StatusRETINAL}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+                                            {% comment %} END OF NOT IN USE BUT HAVE DATA {% endcomment %}
+                                            {% endif %}
+
+
+                                            {% for investigation in post_investigation %}
+                                            <tr>
+                                              <th scope="">Investigation</th>
+                                              <th scope="">{{investigation.Investigation}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+                                            {% endif %}
+
+
+                                            {% for od in post_od %}
+                                            <tr>
+                                                <th scope=""></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope=""><b>OD</b></th>
+                                            </tr>
+                                            <tr>
+                                              <th scope="">Sphere</th>
+                                              <th scope="">{{od.Sphereod}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">CYL</th>
+                                                <th scope="">{{od.CYLod}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">Axis</th>
+                                                <th scope="">{{od.Axisod}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">VA</th>
+                                                <th scope="">{{od.VAod}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">Comment</th>
+                                                <th scope="">{{od.Commentod}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+                                            {% for os in post_os %}
+                                            <tr>
+                                                <th scope=""></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope=""><b>OS</b></th>
+                                            </tr>
+                                            <tr>
+                                              <th scope="">Sphere</th>
+                                              <th scope="">{{os.Sphereos}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">CYL</th>
+                                                <th scope="">{{os.CYLos}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">Axis</th>
+                                                <th scope="">{{os.Axisos}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">VA</th>
+                                                <th scope="">{{os.VAos}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">Comment</th>
+                                                <th scope="">{{os.Commentos}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+                                            {% for diagnosis in post_diagnosis %}
+                                            <tr>
+                                                <th scope=""></th>
+                                            </tr>
+                                            <tr>
+                                              <th scope="">Diagnosis</th>
+                                              <th scope="">{{diagnosis.Diagnosis}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+                                            {% for medication in post_medication %}
+                                            <tr>
+                                                <th scope=""></th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">Medication</th>
+                                            </tr>
+                                            <tr>
+                                              <th scope="">Medication</th>
+                                              <th scope="">{{medication.Medication}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="">Comment</th>
+                                                <th scope="">{{medication.Comment}}</th>
+                                              </tr>
+                                            {% endfor %}
+
+                                            {% for management in post_management %}
+                                            <tr>
+                                                <th scope=""></th>
+                                            </tr>
+                                            <tr>
+                                              <th scope="">Management</th>
+                                              <th scope="">{{management.Management}}</th>
+                                            </tr>
+                                            {% endfor %}
+
+
+
+
+
+
+
+                                          </thead>
+                                          {% else %}
+                                          <p>No Patient Data, Make First Medical Chekup</p>
+                                          {% endif %}
+
+                                        </tbody>
+                                        
+                                    </table> <br><br>
+                                </div>
+                            </div>
+
+
+
+
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+
+    <script src="{% static 'web/js/datatables.js' %}"></script>
+
+
+    <script>
+        // Initially, display the content of the first inner button and its sub-buttons
+        document.getElementById('content0').classList.add("active");
+        document.getElementById('content000').classList.add("active");
+        document.getElementById('innerContent00').classList.add("active");
+        document.getElementById('innerButtonContainer').classList.add("active");
+
+        function toggleContent(index) {
+            var contents = document.getElementsByClassName("button-content");
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].classList.remove("active");
+            }
+            document.getElementById('content' + index).classList.add("active");
+        }
+
+        function toggleSecond(index) {
+            var contents = document.getElementsByClassName("button-contents");
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].classList.remove("active");
+            }
+            document.getElementById('innerSecond' + index).classList.add("active");
+        }
+
+
+
+        function toggleSubButtonContent(index) {
+            var contents = document.getElementsByClassName("sub-button");
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].classList.remove("active");
+            }
+            document.getElementById('contentss' + index).classList.add("active");
+        }
+
+        function toggleSubButtonTwoContent(index) {
+            var contents = document.getElementsByClassName("sub-button");
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].classList.remove("active");
+            }
+            document.getElementById('contentsss' + index).classList.add("active");
+        }
+
+        function toggleInnerContent(innerIndex, outerIndex) {
+            var contents = document.querySelectorAll(".button-content")[outerIndex].getElementsByClassName("button-content");
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].classList.remove("active");
+            }
+            contents[innerIndex].classList.add("active");
+            // Show the sub-buttons when the first inner button is clicked
+            if (innerIndex === 0) {
+                document.getElementById('innerButtonContainer').classList.add("active");
+            } else {
+                document.getElementById('innerButtonContainer').classList.remove("active");
+            }
+        }
+
+        function toggleSubContent(subIndex, innerIndex) {
+            var contents = document.querySelectorAll(".button-content .button-content")[innerIndex].getElementsByClassName("button-content");
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].classList.remove("active");
+            }
+            contents[subIndex].classList.add("active");
+        }
+    </script>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Datatables Fixed Header
+            $("#datatables-fixed-header").DataTable({
+                fixedHeader: true,
+                pageLength: 25
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) { 
+          setTimeout(function(){
+            if(localStorage.getItem('popState') !== 'shown'){
+              window.notyf.open({
+                type: "success",
+                message: "Welcome to Amani International Optical Center.<u><a class=\"text-white\" href=\"https://www.worntechinfo.com\" target=\"_blank\">Contact Developer</a></u> 🚀",
+                duration: 10000,
+                ripple: true,
+                dismissible: false,
+                position: {
+                  x: "left",
+                  y: "bottom"
+                }
+              });
+      
+              localStorage.setItem('popState','shown');
+            }
+          }, 15000);
+        });
+      </script>
+
+      {% comment %} FOR PRINTING {% endcomment %}
+      <script>
+        document.getElementById('printButton').addEventListener('click', function() {
+            var printableContent = document.getElementById('myprint').innerText;
+            var printWindow = window.open('', '_blank');
+            printWindow.document.open();
+            printWindow.document.write('<html><head><title>Print to PDF</title></head><body>');
+            printWindow.document.write('<h2>Printable Content</h2>');
+            printWindow.document.write('<div>' + printableContent + '</div>');
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+        });
+    </script>
+
+    <script>
+        function printData() {
+            var printContent = document.getElementById("myprint").innerHTML;
+            var originalContent = document.body.innerHTML;
+            document.body.innerHTML = printContent;
+            window.print();
+            document.body.innerHTML = originalContent;
+        }
+    </script>
+
+</body>
+
+</html>
+
+{% endblock %}
